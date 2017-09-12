@@ -13,11 +13,10 @@ module.exports = {
         rules: [{
             test: /\.(js|jsx)$/,
             use: ['babel-loader'],
-            exclude: /node_modules/,
             include: path.join(__dirname, 'src')
         }, {
             test: /\.(less|css|scss|sass)$/,
-            use: ["style-loader", "css-loader", "less-loader","sass-loader"]
+            use: ["style-loader", "css-loader", "less-loader", "sass-loader"]
         }, {
             test: /\.(png|jpg|gif|md)$/,
             use: ['file-loader?limit=10000&name=[md5:hash:base64:10].[ext]']
@@ -31,11 +30,11 @@ module.exports = {
             template : "./index.html"
         }),
         new openBrowserWebpackPlugin({
-            url : "http://localhost:3100"
+            url : "http://localhost:3000"
         })
     ],
     devServer: {
-        port : 3100,
+        port : 3000,
         //可以在局域网中使用ip访问
         host : "0.0.0.0",
         disableHostCheck : true

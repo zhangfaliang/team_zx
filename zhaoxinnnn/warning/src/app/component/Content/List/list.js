@@ -1,38 +1,60 @@
 import React, {Component} from 'react';
+import { Table } from 'antd';
 
-import './list.scss';
 
 export default class List extends Component {
+    state = {
+        datas: [],
+        pagination: {},
+        loading: false
+    }
+    constructor (props) {
+        super(props);
+    };
+    renderTable (datas) {
+        if(datas && datas.length != 0){
+            return datas.map(function(curData){
+                if(!curData['otherInfo']){
+                    curData['otherInfo'] = '暂无';
+                };
+                return curData;
+            });
+        }
+    };
     render () {
+        const columns = [{
+                title: '报警时间',
+                dataIndex: 'dateStr',
+                key: 'dateStr'
+            },{
+                title: 'classId',
+                dataIndex: 'classId',
+                key: 'classId'
+            },{
+                title: '错误码',
+                dataIndex: 'err_status',
+                key: 'err_status'
+            },{
+                title: '优先级',
+                dataIndex: 'priority',
+                key: 'priority'
+            },{
+                title: '报错地址',
+                dataIndex: 'appPath',
+                key: 'appPath',
+                render: text => <a href={text} target="_blank">{text}</a>
+            },{
+                title: '其他信息',
+                dataIndex: 'otherInfo',
+                key: 'otherInfo'
+            }];
         return (
             <div className="warning-list">
-                <table className="warning-table">
-                    <colgroup>
-                        <col style={{width:'200px'}}/>
-                        <col style={{width:'200px'}}/>
-                        <col style={{width:'100px'}}/>
-                        <col style={{width:'400px'}}/>
-                        <col style={{width:'200px'}}/>
-                    </colgroup>
-                    <thead>
-                        <tr>
-                            <th>classid</th>
-                            <th>错误码</th>
-                            <th>优先级</th>
-                            <th>报错地址</th>
-                            <th>其他信息</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <Table bordered
+                dataSource={this.renderTable(this.props.datas)} 
+                columns={columns} 
+                rowKey={record => record.registered}
+                pagination={this.state.pagination} />
             </div>
         );
     }
