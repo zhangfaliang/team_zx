@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Button } from 'antd';
+import { Table } from 'antd';
 
 export default class List extends Component {
     state = {
@@ -50,7 +50,11 @@ export default class List extends Component {
 
         return (
             <div className="warning-list">
-                <Button>reoiti</Button>
+                <Table bordered
+                dataSource={this.renderTable(this.props.datas)} 
+                columns={columns} 
+                rowKey={record => record.registered}
+                pagination={this.state.pagination} />
             </div>
         );
     }

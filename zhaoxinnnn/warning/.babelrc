@@ -2,6 +2,8 @@
   "presets": ["es2015", "stage-0", "react"],
   "plugins": [	
 		"transform-runtime", 
-		"transform-decorators-legacy",
+    "transform-decorators-legacy",
+    ["transform-es2015-classes", { "loose": true }],
+    "transform-proto-to-assign",
 		["import", { "libraryName": "antd", "style": "css" }]]
 }
