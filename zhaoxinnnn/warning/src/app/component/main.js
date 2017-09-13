@@ -8,9 +8,9 @@ import Footer from './Footer/Footer';
 import reducer from '../Reducer/MainReducer';
 import {createStore} from 'redux';
 import axios from 'axios';
-
 const store = createStore(reducer);
 const stateDatas = store.getState();
+
 
 export default class MainApp extends Component {
     constructor(props){
@@ -29,6 +29,8 @@ export default class MainApp extends Component {
             });
     };
     render () {
+        const store = createStore(reducer);
+        const stateDatas = store.getState();
         return (
             <div className="warning-container">
                 <Header/>
